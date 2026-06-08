@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Tommaso Corciulo is a sales professional who builds practical software and automation tools."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Tommaso Corciulo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Inter:wght@400;500;600&family=Libre+Caslon+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <a class="monogram" href="#top" aria-label="Home">TC</a>
+      <div class="availability"><i></i> Madrid, Spain</div>
+      <a href="assets/tommaso-corciulo-cv.pdf" download>CV <span>↓</span></a>
+    </header>
+
+    <main id="top">
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">
+          <span>Tommaso</span>
+          <span>Corciulo</span>
+        </h1>
+        <p class="intro-role">Sales professional <i></i> Software builder</p>
+      </section>
+
+      <section class="chat" aria-label="Conversation with Tommaso">
+        <div class="chat-thread" id="chat-thread" aria-live="polite">
+          <article class="message from-tommaso" style="--delay: 0.15s">
+            <div class="avatar" aria-hidden="true">T</div>
+            <div class="bubble">
+              <p>Oh, hi.</p>
+            </div>
+          </article>
+
+          <article class="message from-tommaso" style="--delay: 0.65s">
+            <div class="avatar" aria-hidden="true">T</div>
+            <div class="bubble">
+              <p>
+                I work in sales. I also build software whenever I find a problem
+                that should not require so much manual work.
+              </p>
+            </div>
+          </article>
+
+          <article class="message from-tommaso" style="--delay: 1.15s">
+            <div class="avatar" aria-hidden="true">T</div>
+            <div class="bubble">
+              <p>
+                The tools started as things I wanted for myself. Now they are how
+                I think about work: understand the problem, build the missing
+                piece, make the system better.
+              </p>
+            </div>
+          </article>
+
+          <article class="message from-visitor name-step" style="--delay: 1.65s">
+            <div class="bubble visitor-bubble name-bubble">
+              <label for="visitor-name">Nice to meet you. I’m</label>
+              <div class="name-entry">
+                <input
+                  id="visitor-name"
+                  type="text"
+                  autocomplete="given-name"
+                  placeholder="your name"
+                  maxlength="30"
+                />
+                <button id="name-submit" type="button" aria-label="Continue">↑</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <button class="skip-chat" id="skip-chat" type="button">
+          I’d rather browse normally
+        </button>
+      </section>
+
+      <section class="profile" id="profile" hidden>
+        <div class="profile-nav">
+          <p>Tommaso Corciulo</p>
+          <div>
+            <a href="#profile-about">About</a>
+            <a href="#profile-work">Work</a>
+            <a href="#profile-experience">Experience</a>
+            <a href="#profile-contact">Contact</a>
+          </div>
+        </div>
+
+        <section class="profile-section profile-about" id="profile-about">
+          <p class="section-label">About</p>
+          <div>
+            <h2>A commercial operator who builds.</h2>
+            <p>
+              I am an Account Executive based in Madrid. My background is in
+              revenue growth, negotiation, account strategy, and commercial
+              operations. My curiosity keeps pulling me one layer deeper: when a
+              workflow is repetitive or a useful tool does not exist, I make it.
+            </p>
+          </div>
+        </section>
+
+        <section class="profile-section" id="profile-work">
+          <p class="section-label">Selected work</p>
+          <div class="work-list">
+            <article class="featured-work">
+              <span>01</span>
+              <div class="work-copy">
+                <p class="work-kicker">Sales intelligence · Full-stack build</p>
+                <h3>Italian Mid-Market Prospecting Copilot</h3>
+                <p>
+                  A human-approved agent that turns a CSV of Italian companies
+                  into a prioritized pipeline, explains every score, flags
+                  compliance gaps, drafts evidence-based outreach, and exports
+                  the result for CRM use.
+                </p>
+              </div>
+              <small>Node.js · OpenAI API · CSV</small>
+
+              <div class="agent-preview" aria-label="Prospecting Copilot demo preview">
+                <div class="agent-preview-bar">
+                  <p><i>R</i> Prospecting Copilot</p>
+                  <span>Demo mode</span>
+                </div>
+                <div class="agent-preview-stats">
+                  <div><span>Total accounts</span><strong>4</strong></div>
+                  <div><span>Tier A</span><strong>3</strong></div>
+                  <div><span>Compliance holds</span><strong>1</strong></div>
+                  <div><span>Average score</span><strong>86</strong></div>
+                </div>
+                <div class="agent-preview-body">
+                  <div class="agent-leads">
+                    <p>Prioritized pipeline</p>
+                    <div class="agent-lead is-active">
+                      <b>100</b>
+                      <span>
+                        <strong>Alba Design S.p.A.</strong>
+                        <small>Manufacturing · Lombardia</small>
+                      </span>
+                      <em>Tier A</em>
+                    </div>
+                    <div class="agent-lead">
+                      <b>100</b>
+                      <span>
+                        <strong>Vela Commerce S.r.l.</strong>
+                        <small>E-commerce · Emilia-Romagna</small>
+                      </span>
+                      <em>Tier A</em>
+                    </div>
+                    <div class="agent-lead">
+                      <b>88</b>
+                      <span>
+                        <strong>Terra Software S.r.l.</strong>
+                        <small>SaaS · Lazio</small>
+                      </span>
+                      <em>Review</em>
+                    </div>
+                  </div>
+                  <div class="agent-detail">
+                    <div><span>Tier A</span><strong>100<small>/100</small></strong></div>
+                    <h4>Alba Design S.p.A.</h4>
+                    <p>Giulia Bianchi · CFO</p>
+                    <dl>
+                      <div><dt>Fit</dt><dd>50</dd></div>
+                      <div><dt>Signals</dt><dd>30</dd></div>
+                      <div><dt>Data</dt><dd>20</dd></div>
+                    </dl>
+                    <ul>
+                      <li>International operations</li>
+                      <li>4 currencies indicated</li>
+                      <li>Human approval required</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <p class="work-disclaimer">
+                Working sales-role demo. Figures shown are sample-pipeline
+                outputs, not business results. No automated scraping or sending.
+              </p>
+            </article>
+            <article>
+              <span>02</span>
+              <div>
+                <h3>Commercial workflow automation</h3>
+                <p>
+                  Utilities for research, reporting, CRM hygiene, and recurring
+                  operational tasks.
+                </p>
+              </div>
+              <small>AI · APIs · VBA</small>
+            </article>
+            <article>
+              <span>03</span>
+              <div>
+                <h3>More in progress</h3>
+                <p>
+                  New tools and case studies will be published here as they are
+                  ready to share.
+                </p>
+              </div>
+              <small>Building now</small>
+            </article>
+          </div>
+        </section>
+
+        <section class="profile-section" id="profile-experience">
+          <p class="section-label">Experience</p>
+          <div class="experience-list">
+            <article>
+              <p>2025 — now</p>
+              <div>
+                <h3>Amazon</h3>
+                <p>Vendor Manager / Brand Specialist</p>
+              </div>
+              <strong>+209% YoY growth</strong>
+            </article>
+            <article>
+              <p>2024</p>
+              <div>
+                <h3>Amazon</h3>
+                <p>Program Manager Intern</p>
+              </div>
+              <strong>Operational strategy</strong>
+            </article>
+            <article>
+              <p>2022 — 2023</p>
+              <div>
+                <h3>Microsoft</h3>
+                <p>Program Manager Intern</p>
+              </div>
+              <strong>€200K+ pipeline</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="profile-contact" id="profile-contact">
+          <p>Have something interesting in mind?</p>
+          <h2>Let’s talk.</h2>
+          <div>
+            <a href="mailto:tommasocorciulo02@icloud.com">Email ↗</a>
+            <a
+              href="https://www.linkedin.com/in/tommasocorciulo/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn ↗
+            </a>
+            <a href="assets/tommaso-corciulo-cv.pdf" download>Download CV ↓</a>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year">2026</span> Tommaso Corciulo</p>
+      <p>Sales, systems, software.</p>
+    </footer>
+  </body>
+</html>

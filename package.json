@@ -1,0 +1,9 @@
+{
+  "name": "tommaso-corciulo-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "check": "node --check script.js && node --check server.mjs"
+  }
+}
