@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Project Roky is a private preference picker for a very specific Madrid plan."
+    />
+    <meta name="theme-color" content="#ff4f6d" />
+    <title>Project Roky</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,40,1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/whatyoulookingat/ProjectRoky/styles.css" />
+    <script src="/whatyoulookingat/ProjectRoky/script.js" defer></script>
+  </head>
+  <body>
+    <main class="roky-shell">
+      <header class="roky-header">
+        <a href="/" aria-label="Back to Tommaso Corciulo">TC</a>
+        <span>Private link</span>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Project Roky</p>
+          <h1 id="page-title">A small Madrid conspiracy.</h1>
+          <p>
+            Pick a window. Open the possibilities. Mark anything you would not
+            immediately flee from. I will do the rest.
+          </p>
+        </div>
+        <div class="hero-note" aria-hidden="true">
+          <span>Madrid</span>
+          <strong>2 people</strong>
+          <em>one questionable plan</em>
+        </div>
+      </section>
+
+      <form
+        class="planner"
+        id="roky-form"
+        action="https://formsubmit.co/tommasocorciulo02@icloud.com"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="Project Roky signal" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input
+          type="hidden"
+          name="_next"
+          value="https://tommasocorciulo.com/whatyoulookingat/ProjectRoky/thanks.html"
+        />
+        <input type="hidden" name="Selected window" id="selected-window-field" />
+        <input type="hidden" name="Selected quests" id="selected-plan-field" />
+        <input type="hidden" name="Selected vibes" id="selected-vibe-field" />
+        <input type="hidden" name="Full signal" id="signal-field" />
+
+        <section class="panel window-panel" aria-labelledby="window-title">
+          <div class="section-heading">
+            <p class="eyebrow">Step 01</p>
+            <h2 id="window-title">Pick the window.</h2>
+          </div>
+          <div class="window-grid" id="window-grid" role="radiogroup" aria-label="Time window"></div>
+        </section>
+
+        <section class="panel activity-panel" aria-labelledby="activity-title">
+          <div class="section-heading">
+            <p class="eyebrow">Step 02</p>
+            <h2 id="activity-title">Open the list.</h2>
+          </div>
+          <div class="activity-grid is-locked" id="activity-grid" aria-label="Quest options">
+            <div class="locked-state">
+              <span>Locked</span>
+              <p>Choose a window first. I am trying to be mysterious but also useful.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel final-panel" aria-labelledby="final-title">
+          <div class="section-heading">
+            <p class="eyebrow">Step 03</p>
+            <h2 id="final-title">Leave a trace.</h2>
+          </div>
+          <div class="final-grid">
+            <label>
+              <span>Your name</span>
+              <input name="Name" type="text" autocomplete="given-name" placeholder="Roky" />
+            </label>
+            <label>
+              <span>Optional note</span>
+              <textarea
+                name="Note"
+                rows="4"
+                placeholder="A useful detail, a hard no, or a tiny dramatic preference."
+              ></textarea>
+            </label>
+          </div>
+
+          <div class="selection-card" id="selection-card">
+            <p>No quests selected yet.</p>
+          </div>
+
+          <button class="send-button" type="submit">
+            <span>Send my preferences</span>
+            <i aria-hidden="true">-></i>
+          </button>
+          <p class="fine-print">
+            This sends your chosen window and quests to Tommaso. The page never
+            uses the forbidden label.
+          </p>
+        </section>
+      </form>
+
+      <section class="confirmation" id="confirmation" hidden>
+        <p class="eyebrow">Signal received</p>
+        <h2>Excellent. The plot thickens.</h2>
+        <p id="confirmation-copy"></p>
+        <a id="email-fallback" href="mailto:tommasocorciulo02@icloud.com">Send another way</a>
+      </section>
+    </main>
+  </body>
+</html>
