@@ -92,6 +92,7 @@
           <div>
             <a href="#profile-about">About</a>
             <a href="#profile-work">Work</a>
+            <a href="#profile-play">Play</a>
             <a href="#profile-experience">Experience</a>
             <a href="#profile-contact">Contact</a>
           </div>
@@ -211,6 +212,44 @@
               </div>
               <small>Building now</small>
             </article>
+          </div>
+        </section>
+
+        <section class="profile-section geography-section" id="profile-play">
+          <p class="section-label">A quick detour</p>
+          <div>
+            <div class="game-intro">
+              <p class="work-kicker">Geography minigame · 5 rounds</p>
+              <h2>Where in the world?</h2>
+              <p>
+                Identify the country from three clues. No maps, no search, just
+                your increasingly questionable geographic confidence.
+              </p>
+            </div>
+
+            <div class="geo-game" id="geo-game">
+              <div class="geo-game-topbar">
+                <p>Round <strong id="geo-round">1</strong> / 5</p>
+                <div>
+                  <span>Score <strong id="geo-score">0</strong></span>
+                  <span>Streak <strong id="geo-streak">0</strong></span>
+                </div>
+              </div>
+
+              <div class="geo-game-stage" id="geo-game-stage">
+                <p class="geo-eyebrow" id="geo-eyebrow">Your clues</p>
+                <ul class="geo-clues" id="geo-clues"></ul>
+                <div class="geo-options" id="geo-options"></div>
+                <p class="geo-feedback" id="geo-feedback" aria-live="polite"></p>
+              </div>
+
+              <div class="geo-game-result" id="geo-game-result" hidden>
+                <p class="geo-result-mark" id="geo-result-mark">4/5</p>
+                <h3 id="geo-result-title">Well travelled.</h3>
+                <p id="geo-result-copy"></p>
+                <button id="geo-restart" type="button">Play again ↻</button>
+              </div>
+            </div>
           </div>
         </section>
 
