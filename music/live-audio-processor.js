@@ -44,7 +44,7 @@ class TouchMusicLiveProcessor extends AudioWorkletProcessor {
           this.grainStart = this.readPosition;
           this.grainPhase = 0;
           this.grainLength = Math.floor(
-            sampleRate * Math.max(0.08, Math.min(0.34, data.grainSeconds || 0.16)),
+            sampleRate * Math.max(0.08, Math.min(0.8, data.grainSeconds || 0.16)),
           );
         } else {
           this.frozen = false;
@@ -57,7 +57,7 @@ class TouchMusicLiveProcessor extends AudioWorkletProcessor {
       if (data.type === "pulse") {
         const grainSeconds = Math.max(
           0.07,
-          Math.min(0.24, data.grainSeconds || 0.125),
+          Math.min(0.65, data.grainSeconds || 0.125),
         );
         const repeats = Math.max(2, Math.min(8, data.repeats || 4));
         this.grainLength = Math.floor(sampleRate * grainSeconds);
