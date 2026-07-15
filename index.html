@@ -5,305 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Tommaso Corciulo is a sales professional who builds practical software and automation tools."
+      content="Tommaso Corciulo. Private Client Relations."
     />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#d8d0c3" />
     <title>Tommaso Corciulo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Inter:wght@400;500;600&family=Libre+Caslon+Display&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Mono:wght@300;400&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <header class="masthead">
-      <a class="monogram" href="#top" aria-label="Home">TC</a>
-      <div class="availability"><i></i> Madrid, Spain</div>
-      <a href="assets/tommaso-corciulo-cv.pdf" download>CV <span>↓</span></a>
+    <header class="site-header" aria-label="Site header">
+      <a class="monogram" href="#top" aria-label="Tommaso Corciulo">TC</a>
+      <p>Private Client Relations</p>
+      <a href="#contact">Contact</a>
     </header>
 
     <main id="top">
-      <section class="intro" aria-labelledby="page-title">
-        <h1 id="page-title">
-          <span>Tommaso</span>
-          <span>Corciulo</span>
-        </h1>
-        <p class="intro-role">Sales professional <i></i> Software builder</p>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="label">Private Client Relations</p>
+          <h1 id="page-title">
+            <span>Tommaso</span>
+            <span>Corciulo</span>
+          </h1>
+        </div>
+        <p class="positioning">
+          Relationships, introductions and opportunities handled with discretion.
+        </p>
       </section>
 
-      <section class="chat" aria-label="Conversation with Tommaso">
-        <div class="chat-thread" id="chat-thread" aria-live="polite">
-          <article class="message from-tommaso" style="--delay: 0.15s">
-            <div class="avatar" aria-hidden="true">T</div>
-            <div class="bubble">
-              <p>Oh, hi.</p>
-            </div>
-          </article>
-
-          <article class="message from-tommaso" style="--delay: 0.65s">
-            <div class="avatar" aria-hidden="true">T</div>
-            <div class="bubble">
-              <p>
-                I work in sales. I also build software whenever I find a problem
-                that should not require so much manual work.
-              </p>
-            </div>
-          </article>
-
-          <article class="message from-tommaso" style="--delay: 1.15s">
-            <div class="avatar" aria-hidden="true">T</div>
-            <div class="bubble">
-              <p>
-                The tools started as things I wanted for myself. Now they are how
-                I think about work: understand the problem, build the missing
-                piece, make the system better.
-              </p>
-            </div>
-          </article>
-
-          <article class="message from-visitor name-step" style="--delay: 1.65s">
-            <div class="bubble visitor-bubble name-bubble">
-              <label for="visitor-name">Nice to meet you. I’m</label>
-              <div class="name-entry">
-                <input
-                  id="visitor-name"
-                  type="text"
-                  autocomplete="given-name"
-                  placeholder="your name"
-                  maxlength="30"
-                />
-                <button id="name-submit" type="button" aria-label="Continue">↑</button>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <button class="skip-chat" id="skip-chat" type="button">
-          I’d rather browse normally
-        </button>
+      <section class="principle-strip" aria-label="Operating note">
+        <p>Discretion</p>
+        <p>Judgement</p>
+        <p>Responsiveness</p>
+        <p>Long-term regard</p>
       </section>
 
-      <section class="profile" id="profile" hidden>
-        <div class="profile-nav">
-          <p>Tommaso Corciulo</p>
-          <div>
-            <a href="#profile-about">About</a>
-            <a href="#profile-work">Work</a>
-            <a href="#profile-play">Play</a>
-            <a href="#profile-experience">Experience</a>
-            <a href="#profile-contact">Contact</a>
-          </div>
+      <section class="note-section" aria-label="About">
+        <p>
+          A calm point of contact for considered conversations. Attention is
+          personal, responsive and discreet, with judgement reserved for the
+          people involved, the context and the long-term value of the relationship.
+        </p>
+      </section>
+
+      <section class="correspondence" id="contact" aria-labelledby="contact-title">
+        <div class="correspondence-head">
+          <p class="label">Private Correspondence</p>
+          <h2 id="contact-title">Send a direct note.</h2>
+          <p>
+            The form is prepared for a private email endpoint. No information is
+            stored in the browser.
+          </p>
         </div>
 
-        <section class="profile-section profile-about" id="profile-about">
-          <p class="section-label">About</p>
-          <div>
-            <h2>A commercial operator who builds.</h2>
-            <p>
-              I am an Account Executive based in Madrid. My background is in
-              revenue growth, negotiation, account strategy, and commercial
-              operations. My curiosity keeps pulling me one layer deeper: when a
-              workflow is repetitive or a useful tool does not exist, I make it.
-            </p>
+        <form
+          class="contact-form"
+          id="contact-form"
+          action="/api/contact"
+          method="post"
+          data-endpoint="/api/contact"
+        >
+          <div class="form-line">
+            <span>01</span>
+            <label>
+              <em>First Name</em>
+              <input name="firstName" type="text" autocomplete="given-name" required />
+            </label>
+            <label>
+              <em>Last Name</em>
+              <input name="lastName" type="text" autocomplete="family-name" required />
+            </label>
           </div>
-        </section>
 
-        <section class="profile-section" id="profile-work">
-          <p class="section-label">Selected work</p>
-          <div class="work-list">
-            <article class="featured-work">
-              <span>01</span>
-              <div class="work-copy">
-                <p class="work-kicker">Sales intelligence · Full-stack build</p>
-                <h3>Italian Mid-Market Prospecting Copilot</h3>
-                <p>
-                  A human-approved agent that turns a CSV of Italian companies
-                  into a prioritized pipeline, explains every score, flags
-                  compliance gaps, drafts evidence-based outreach, and exports
-                  the result for CRM use.
-                </p>
-              </div>
-              <small>Node.js · OpenAI API · CSV</small>
-
-              <div class="agent-preview" aria-label="Prospecting Copilot demo preview">
-                <div class="agent-preview-bar">
-                  <p><i>R</i> Prospecting Copilot</p>
-                  <span>Demo mode</span>
-                </div>
-                <div class="agent-preview-stats">
-                  <div><span>Total accounts</span><strong>4</strong></div>
-                  <div><span>Tier A</span><strong>3</strong></div>
-                  <div><span>Compliance holds</span><strong>1</strong></div>
-                  <div><span>Average score</span><strong>86</strong></div>
-                </div>
-                <div class="agent-preview-body">
-                  <div class="agent-leads">
-                    <p>Prioritized pipeline</p>
-                    <div class="agent-lead is-active">
-                      <b>100</b>
-                      <span>
-                        <strong>Alba Design S.p.A.</strong>
-                        <small>Manufacturing · Lombardia</small>
-                      </span>
-                      <em>Tier A</em>
-                    </div>
-                    <div class="agent-lead">
-                      <b>100</b>
-                      <span>
-                        <strong>Vela Commerce S.r.l.</strong>
-                        <small>E-commerce · Emilia-Romagna</small>
-                      </span>
-                      <em>Tier A</em>
-                    </div>
-                    <div class="agent-lead">
-                      <b>88</b>
-                      <span>
-                        <strong>Terra Software S.r.l.</strong>
-                        <small>SaaS · Lazio</small>
-                      </span>
-                      <em>Review</em>
-                    </div>
-                  </div>
-                  <div class="agent-detail">
-                    <div><span>Tier A</span><strong>100<small>/100</small></strong></div>
-                    <h4>Alba Design S.p.A.</h4>
-                    <p>Giulia Bianchi · CFO</p>
-                    <dl>
-                      <div><dt>Fit</dt><dd>50</dd></div>
-                      <div><dt>Signals</dt><dd>30</dd></div>
-                      <div><dt>Data</dt><dd>20</dd></div>
-                    </dl>
-                    <ul>
-                      <li>International operations</li>
-                      <li>4 currencies indicated</li>
-                      <li>Human approval required</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <p class="work-disclaimer">
-                Working sales-role demo. Figures shown are sample-pipeline
-                outputs, not business results. No automated scraping or sending.
-              </p>
-            </article>
-            <article>
-              <span>02</span>
-              <div>
-                <h3>Commercial workflow automation</h3>
-                <p>
-                  Utilities for research, reporting, CRM hygiene, and recurring
-                  operational tasks.
-                </p>
-              </div>
-              <small>AI · APIs · VBA</small>
-            </article>
-            <article>
-              <span>03</span>
-              <div>
-                <h3>More in progress</h3>
-                <p>
-                  New tools and case studies will be published here as they are
-                  ready to share.
-                </p>
-              </div>
-              <small>Building now</small>
-            </article>
+          <div class="form-line">
+            <span>02</span>
+            <label>
+              <em>Company</em>
+              <input name="company" type="text" autocomplete="organization" required />
+            </label>
+            <label>
+              <em>Role</em>
+              <input name="role" type="text" autocomplete="organization-title" required />
+            </label>
           </div>
-        </section>
 
-        <section class="profile-section geography-section" id="profile-play">
-          <p class="section-label">A quick detour</p>
-          <div>
-            <div class="game-intro">
-              <p class="work-kicker">Geography minigame · 5 rounds</p>
-              <h2>Where in the world?</h2>
-              <p>
-                Identify the country from three clues. No maps, no search, just
-                your increasingly questionable geographic confidence.
-              </p>
-            </div>
-
-            <div class="geo-game" id="geo-game">
-              <div class="geo-game-topbar">
-                <p>Round <strong id="geo-round">1</strong> / 5</p>
-                <div>
-                  <span>Score <strong id="geo-score">0</strong></span>
-                  <span>Streak <strong id="geo-streak">0</strong></span>
-                </div>
-              </div>
-
-              <div class="geo-game-stage" id="geo-game-stage">
-                <p class="geo-eyebrow" id="geo-eyebrow">Your clues</p>
-                <ul class="geo-clues" id="geo-clues"></ul>
-                <div class="geo-options" id="geo-options"></div>
-                <p class="geo-feedback" id="geo-feedback" aria-live="polite"></p>
-              </div>
-
-              <div class="geo-game-result" id="geo-game-result" hidden>
-                <p class="geo-result-mark" id="geo-result-mark">4/5</p>
-                <h3 id="geo-result-title">Well travelled.</h3>
-                <p id="geo-result-copy"></p>
-                <button id="geo-restart" type="button">Play again ↻</button>
-              </div>
-            </div>
+          <div class="form-line">
+            <span>03</span>
+            <label>
+              <em>Email</em>
+              <input name="email" type="email" autocomplete="email" required />
+            </label>
+            <label>
+              <em>Phone optional</em>
+              <input name="phone" type="tel" autocomplete="tel" />
+            </label>
           </div>
-        </section>
 
-        <section class="profile-section" id="profile-experience">
-          <p class="section-label">Experience</p>
-          <div class="experience-list">
-            <article>
-              <p>2025 — now</p>
-              <div>
-                <h3>Amazon</h3>
-                <p>Vendor Manager / Brand Specialist</p>
-              </div>
-              <strong>+209% YoY growth</strong>
-            </article>
-            <article>
-              <p>2024</p>
-              <div>
-                <h3>Amazon</h3>
-                <p>Program Manager Intern</p>
-              </div>
-              <strong>Operational strategy</strong>
-            </article>
-            <article>
-              <p>2022 — 2023</p>
-              <div>
-                <h3>Microsoft</h3>
-                <p>Program Manager Intern</p>
-              </div>
-              <strong>€200K+ pipeline</strong>
-            </article>
+          <div class="form-line message-line">
+            <span>04</span>
+            <label>
+              <em>How can I help?</em>
+              <textarea name="message" rows="5" required></textarea>
+            </label>
           </div>
-        </section>
 
-        <section class="profile-contact" id="profile-contact">
-          <p>Have something interesting in mind?</p>
-          <h2>Let’s talk.</h2>
-          <div>
-            <a href="mailto:tommasocorciulo02@icloud.com">Email ↗</a>
-            <a
-              href="https://www.linkedin.com/in/tommasocorciulo/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn ↗
-            </a>
-            <a href="assets/tommaso-corciulo-cv.pdf" download>Download CV ↓</a>
+          <div class="form-actions">
+            <button type="submit">Submit</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </div>
-        </section>
+        </form>
+
+        <div class="success-message" id="success-message" hidden>
+          <p>Thank you.</p>
+          <p>I'll get back to you as soon as possible.</p>
+        </div>
+      </section>
+
+      <section class="secondary-contact" aria-label="Secondary contact details">
+        <a href="mailto:tommasocorciulo02@icloud.com">
+          <span>Email</span>
+          tommasocorciulo02@icloud.com
+        </a>
+        <a
+          href="https://www.linkedin.com/in/tommasocorciulo/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>LinkedIn</span>
+          tommasocorciulo
+        </a>
       </section>
     </main>
 
     <footer>
       <p>© <span id="year">2026</span> Tommaso Corciulo</p>
-      <p>Sales, systems, software.</p>
+      <p>Madrid</p>
     </footer>
   </body>
 </html>
