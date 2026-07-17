@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tc-crm-relay",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-15",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "tommasocorciulo.com/api/*",
+      "zone_name": "tommasocorciulo.com"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "EMAIL"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGIN": "https://tommasocorciulo.com",
+    "EMAIL_FROM": "crm@tommasocorciulo.com",
+    "EMAIL_TO": "contact@tommasocorciulo.com"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
