@@ -1,4 +1,5 @@
 import { createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { homedir } from "node:os";
 import { extname, join, normalize } from "node:path";
@@ -8,6 +9,7 @@ import { normalizeCrmRecord } from "./crm/schema.mjs";
 const port = Number(process.env.PORT || 4173);
 const root = new URL(".", import.meta.url).pathname;
 const maxJsonBytes = 64 * 1024;
+const mailSyncIntervalMs = 5 * 60 * 1000;
 const localCrmFolder = join(
   homedir(),
   "Library",
@@ -15,6 +17,9 @@ const localCrmFolder = join(
   "com~apple~CloudDocs",
   "CRM Intake",
 );
+const mailImportScript = join(root, "scripts", "import-mail-crm-attachments.mjs");
+let mailSyncPromise = null;
+let lastMailSync = null;
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
@@ -89,15 +94,73 @@ function readLocalCrmRecords() {
     .sort((a, b) => new Date(b.record.updatedAt) - new Date(a.record.updatedAt));
 }
 
+function syncMailAttachments() {
+  if (mailSyncPromise) return mailSyncPromise;
+
+  mailSyncPromise = new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [mailImportScript], {
+      cwd: root,
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let stdout = "";
+    let stderr = "";
+
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk;
+    });
+
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk;
+    });
+
+    child.on("close", (code) => {
+      const result = {
+        at: new Date().toISOString(),
+        ok: code === 0,
+        message: (stdout || stderr).trim(),
+      };
+      lastMailSync = result;
+      mailSyncPromise = null;
+
+      if (code === 0) {
+        resolve(result);
+      } else {
+        reject(Object.assign(new Error(result.message || "Mail sync failed."), { result }));
+      }
+    });
+  });
+
+  return mailSyncPromise;
+}
+
 async function handleLocalCrmRequest(request, response, requestPath) {
   if (requestPath === "/api/local-crm/summary" && request.method === "GET") {
     try {
       sendJson(response, 200, {
         folder: localCrmFolder,
         count: readLocalCrmRecords().length,
+        lastMailSync,
       });
     } catch {
       sendJson(response, 500, { error: "Unable to load local CRM summary." });
+    }
+
+    return true;
+  }
+
+  if (requestPath === "/api/local-crm/sync" && request.method === "POST") {
+    try {
+      const sync = await syncMailAttachments();
+      sendJson(response, 200, {
+        sync,
+        folder: localCrmFolder,
+        count: readLocalCrmRecords().length,
+      });
+    } catch (error) {
+      sendJson(response, 500, {
+        error: error.message || "Unable to sync Apple Mail.",
+        sync: error.result || lastMailSync,
+      });
     }
 
     return true;
@@ -196,7 +259,7 @@ async function handleApiRequest(request, response, requestPath) {
   return true;
 }
 
-createServer(async (request, response) => {
+const server = createServer(async (request, response) => {
   const requestPath = decodeURIComponent((request.url || "/").split("?")[0]);
 
   if (requestPath.startsWith("/api/")) {
@@ -222,6 +285,16 @@ createServer(async (request, response) => {
     "Content-Type": mimeTypes[extname(filePath)] || "application/octet-stream",
   });
   createReadStream(filePath).pipe(response);
-}).listen(port, "127.0.0.1", () => {
+});
+
+server.listen(port, "127.0.0.1", () => {
   console.log(`Portfolio running at http://127.0.0.1:${port}`);
+  syncMailAttachments().catch((error) => {
+    console.warn(`Initial CRM Mail sync failed: ${error.message}`);
+  });
+  setInterval(() => {
+    syncMailAttachments().catch((error) => {
+      console.warn(`Scheduled CRM Mail sync failed: ${error.message}`);
+    });
+  }, mailSyncIntervalMs);
 });

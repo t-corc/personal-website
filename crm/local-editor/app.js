@@ -1,6 +1,7 @@
 import { coreFieldDefinitions, createEmptyCrmRecord, normalizeCrmRecord } from "../schema.mjs";
 
 const folderButton = document.querySelector("#open-folder");
+const syncMailButton = document.querySelector("#sync-mail");
 const newButton = document.querySelector("#new-record");
 const saveButton = document.querySelector("#save-record");
 const addFieldButton = document.querySelector("#add-field");
@@ -22,6 +23,7 @@ let dirty = false;
 let localServerFolder = null;
 const canUseLocalServer =
   window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
+const localRefreshIntervalMs = 60 * 1000;
 
 const tableFields = [
   "fullName",
@@ -45,6 +47,7 @@ function canEditRecords() {
 
 function syncControls() {
   const canEdit = canEditRecords();
+  syncMailButton.disabled = !canUseLocalServer;
   newButton.disabled = !canEdit;
   saveButton.disabled = !canEdit || !selectedId || !dirty;
   addFieldButton.disabled = !canEdit || !selectedId;
@@ -189,7 +192,7 @@ async function readRecordsFromFolder(handle) {
   return loaded;
 }
 
-async function loadLocalServerRecords() {
+async function loadLocalServerRecords({ silent = false } = {}) {
   const response = await fetch("/api/local-crm/records");
   const result = await response.json().catch(() => ({}));
 
@@ -200,12 +203,40 @@ async function loadLocalServerRecords() {
   directoryHandle = null;
   localServerFolder = result.folder;
   records = (result.records || []).map(({ record }) => normalizeCrmRecord(record));
-  selectedId = records[0]?.id || null;
-  folderStatus.textContent = `Auto-loaded ${records.length} record${records.length === 1 ? "" : "s"}`;
+  selectedId =
+    records.some((record) => record.id === selectedId) ? selectedId : records[0]?.id || null;
+
+  if (!silent) {
+    folderStatus.textContent = `Auto-loaded ${records.length} record${records.length === 1 ? "" : "s"}`;
+  }
+
   folderButton.textContent = "Choose different folder";
   setDirty(false);
   renderTable();
   renderEditor();
+}
+
+async function syncMailNow() {
+  if (!canUseLocalServer) return;
+
+  syncMailButton.disabled = true;
+  folderStatus.textContent = "Syncing Mail.";
+
+  try {
+    const response = await fetch("/api/local-crm/sync", { method: "POST" });
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.error || "Unable to sync Mail.");
+    }
+
+    await loadLocalServerRecords({ silent: true });
+    folderStatus.textContent = `Synced ${result.count} record${result.count === 1 ? "" : "s"}`;
+  } catch (error) {
+    folderStatus.textContent = error.message || "Unable to sync Mail.";
+  } finally {
+    syncControls();
+  }
 }
 
 async function chooseFolder() {
@@ -325,6 +356,7 @@ function addCustomField() {
 }
 
 folderButton.addEventListener("click", chooseFolder);
+syncMailButton.addEventListener("click", syncMailNow);
 newButton.addEventListener("click", createRecord);
 saveButton.addEventListener("click", saveRecord);
 addFieldButton.addEventListener("click", addCustomField);
@@ -357,6 +389,11 @@ if (canUseLocalServer) {
     folderStatus.textContent = error.message || "No folder selected";
     renderTable();
   });
+  setInterval(() => {
+    if (!dirty) {
+      loadLocalServerRecords({ silent: true }).catch(() => {});
+    }
+  }, localRefreshIntervalMs);
 } else {
   folderStatus.textContent = "Public editor shell";
   renderTable();
