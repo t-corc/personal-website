@@ -18,7 +18,7 @@
   "vars": {
     "ALLOWED_ORIGIN": "https://tommasocorciulo.com",
     "EMAIL_FROM": "crm@tommasocorciulo.com",
-    "EMAIL_TO": "contact@tommasocorciulo.com"
+    "EMAIL_TO": "Tommasocorciulo02@icloud.com"
   },
   "observability": {
     "enabled": true

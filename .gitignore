@@ -2,3 +2,4 @@
 node_modules/
 site-preview*.png
 .touch-music-build/
+.wrangler/
