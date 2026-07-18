@@ -20,6 +20,8 @@ let records = [];
 let selectedId = null;
 let dirty = false;
 let localServerFolder = null;
+const canUseLocalServer =
+  window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
 
 const tableFields = [
   "fullName",
@@ -320,7 +322,12 @@ customForm.addEventListener("input", () => {
   setDirty(true);
 });
 
-loadLocalServerRecords().catch((error) => {
-  folderStatus.textContent = error.message || "No folder selected";
+if (canUseLocalServer) {
+  loadLocalServerRecords().catch((error) => {
+    folderStatus.textContent = error.message || "No folder selected";
+    renderTable();
+  });
+} else {
+  folderStatus.textContent = "Public editor shell";
   renderTable();
-});
+}
