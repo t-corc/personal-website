@@ -36,7 +36,18 @@ const tableFields = [
 
 function setDirty(value) {
   dirty = value;
-  saveButton.disabled = !selectedId || !dirty;
+  saveButton.disabled = !canEditRecords() || !selectedId || !dirty;
+}
+
+function canEditRecords() {
+  return Boolean(localServerFolder || directoryHandle);
+}
+
+function syncControls() {
+  const canEdit = canEditRecords();
+  newButton.disabled = !canEdit;
+  saveButton.disabled = !canEdit || !selectedId || !dirty;
+  addFieldButton.disabled = !canEdit || !selectedId;
 }
 
 function getSelectedRecord() {
@@ -73,6 +84,8 @@ function allVisibleRecords() {
 }
 
 function renderTable() {
+  syncControls();
+
   tableHead.innerHTML = `
     <tr>
       ${tableFields.map((field) => `<th>${field === "updatedAt" ? "Updated" : labelFor(field)}</th>`).join("")}
@@ -120,9 +133,10 @@ function escapeHtml(value) {
 
 function renderEditor() {
   const record = getSelectedRecord();
+  const canEdit = canEditRecords();
   editor.hidden = !record;
-  saveButton.disabled = !record || !dirty;
-  addFieldButton.disabled = !record;
+  saveButton.disabled = !canEdit || !record || !dirty;
+  addFieldButton.disabled = !canEdit || !record;
 
   if (!record) return;
 
@@ -134,8 +148,8 @@ function renderEditor() {
       const value = escapeHtml(record.fields[field.key] || "");
       const control =
         field.type === "textarea"
-          ? `<textarea name="${field.key}" rows="5">${value}</textarea>`
-          : `<input name="${field.key}" type="${field.type}" value="${value}" />`;
+          ? `<textarea name="${field.key}" rows="5" ${canEdit ? "" : "disabled"}>${value}</textarea>`
+          : `<input name="${field.key}" type="${field.type}" value="${value}" ${canEdit ? "" : "disabled"} />`;
 
       return `
         <label>
@@ -151,7 +165,9 @@ function renderEditor() {
       ([key, value]) => `
         <label>
           <span>${escapeHtml(key)}</span>
-          <input name="${escapeHtml(key)}" value="${escapeHtml(value)}" data-custom-field />
+          <input name="${escapeHtml(key)}" value="${escapeHtml(value)}" data-custom-field ${
+            canEdit ? "" : "disabled"
+          } />
         </label>
       `,
     )
@@ -209,6 +225,11 @@ async function chooseFolder() {
 }
 
 function createRecord() {
+  if (!canEditRecords()) {
+    folderStatus.textContent = "Choose a folder before adding records";
+    return;
+  }
+
   const record = createEmptyCrmRecord({
     id: crypto.randomUUID(),
     source: "manual",
@@ -223,7 +244,7 @@ function createRecord() {
 
 function updateSelectedFromForms() {
   const record = getSelectedRecord();
-  if (!record) return;
+  if (!record || !canEditRecords()) return;
 
   const formData = new FormData(recordForm);
   coreFieldDefinitions.forEach((field) => {
@@ -241,6 +262,10 @@ function updateSelectedFromForms() {
 async function saveRecord() {
   const record = getSelectedRecord();
   if (!record) return;
+  if (!canEditRecords()) {
+    folderStatus.textContent = "Choose a folder before saving";
+    return;
+  }
 
   updateSelectedFromForms();
 
@@ -280,7 +305,10 @@ async function saveRecord() {
 
 function addCustomField() {
   const record = getSelectedRecord();
-  if (!record) return;
+  if (!record || !canEditRecords()) {
+    folderStatus.textContent = "Choose a folder before editing fields";
+    return;
+  }
 
   const key = window.prompt("Field name");
   if (!key) return;
@@ -312,12 +340,14 @@ tableBody.addEventListener("click", (event) => {
 });
 
 recordForm.addEventListener("input", () => {
+  if (!canEditRecords()) return;
   updateSelectedFromForms();
   setDirty(true);
   renderTable();
 });
 
 customForm.addEventListener("input", () => {
+  if (!canEditRecords()) return;
   updateSelectedFromForms();
   setDirty(true);
 });
