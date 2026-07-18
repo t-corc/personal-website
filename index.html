@@ -7,26 +7,32 @@
       name="description"
       content="Tommaso Corciulo. Private Client Relations."
     />
-    <meta name="theme-color" content="#090907" />
+    <meta name="theme-color" content="#f1eee7" />
     <title>Tommaso Corciulo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Mono:wght@300;400&family=Inter:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=DM+Mono:wght@300;400&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260718-premium-2" />
+    <link rel="stylesheet" href="styles.css?v=20260718-directory-refined" />
     <script src="script.js" defer></script>
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
       <a class="monogram" href="#top" aria-label="Tommaso Corciulo">TC</a>
       <p>Private Client Relations</p>
-      <a href="#contact">Contact</a>
+      <a class="desktop-contact" href="#contact">Contact</a>
+      <a class="mobile-contact" href="#contact">Contact</a>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="page-title">
+        <div class="hero-folio" aria-hidden="true">
+          <span>No. 01 / 100</span>
+          <span>Madrid</span>
+        </div>
+
         <div class="hero-copy">
           <h1 id="page-title">
             <span>Tommaso</span>
@@ -37,41 +43,31 @@
             discretion, care and long-term intent.
           </p>
         </div>
+
         <div class="hero-stamp" aria-hidden="true">
           <span>TC</span>
           <small>Private<br />Client<br />Relations</small>
         </div>
+
         <a class="scroll-cue" href="#principles" aria-label="Continue to principles">
           <span></span>
         </a>
       </section>
 
       <section class="principle-strip" id="principles" aria-label="Operating note">
-        <article>
-          <span>01</span>
-          <h2>Discretion</h2>
-          <p>Confidentiality is the foundation of every relationship.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h2>Judgement</h2>
-          <p>The right connection matters most at the right time.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h2>Responsiveness</h2>
-          <p>Clear movement, considered timing and direct communication.</p>
-        </article>
-        <article>
-          <span>04</span>
-          <h2>Long-term regard</h2>
-          <p>Relationships are treated as enduring work, not transactions.</p>
-        </article>
+        <p class="section-index">Operating Note</p>
+        <div class="principle-line">
+          <span>Discretion</span>
+          <span>Judgement</span>
+          <span>Responsiveness</span>
+          <span>Long-term regard</span>
+        </div>
       </section>
 
       <section class="note-section" aria-label="About">
-        <div>
+        <div class="section-rail">
           <p class="section-index">About</p>
+          <span aria-hidden="true">01</span>
         </div>
         <p>
           A calm point of contact for considered conversations. Attention is
@@ -81,8 +77,12 @@
       </section>
 
       <section class="correspondence" id="contact" aria-labelledby="contact-title">
-        <div class="correspondence-head">
+        <div class="section-rail">
           <p class="section-index">Private Correspondence</p>
+          <span aria-hidden="true">02</span>
+        </div>
+
+        <div class="correspondence-head">
           <h2 id="contact-title">Send a direct note.</h2>
           <p>
             The form is prepared for a private email endpoint. No information is
@@ -98,7 +98,6 @@
           data-endpoint="/api/contact"
         >
           <div class="form-line">
-            <span>01</span>
             <label>
               <em>First Name</em>
               <input name="firstName" type="text" autocomplete="given-name" required />
@@ -110,7 +109,6 @@
           </div>
 
           <div class="form-line">
-            <span>02</span>
             <label>
               <em>Company</em>
               <input name="company" type="text" autocomplete="organization" required />
@@ -122,7 +120,6 @@
           </div>
 
           <div class="form-line">
-            <span>03</span>
             <label>
               <em>Email</em>
               <input name="email" type="email" autocomplete="email" required />
@@ -134,7 +131,6 @@
           </div>
 
           <div class="form-line message-line">
-            <span>04</span>
             <label>
               <em>How can I help?</em>
               <textarea name="message" rows="5" required></textarea>
