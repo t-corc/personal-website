@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node server.mjs",
-    "check": "node --check script.js && node --check server.mjs && node --check crm/intake.mjs && node --check crm/sources/main-page.mjs && node --check crm/storage/record-file-store.mjs && node --check crm/schema.mjs && node --check crm/record-factory.mjs && node --check crm/local-editor/app.js && node --check workers/crm-relay/src/index.js"
+    "crm:import-mail": "node scripts/import-mail-crm-attachments.mjs",
+    "check": "node --check script.js && node --check server.mjs && node --check crm/intake.mjs && node --check crm/sources/main-page.mjs && node --check crm/storage/record-file-store.mjs && node --check crm/schema.mjs && node --check crm/record-factory.mjs && node --check crm/local-editor/app.js && node --check scripts/import-mail-crm-attachments.mjs && node --check workers/crm-relay/src/index.js"
   }
 }

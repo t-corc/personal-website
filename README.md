@@ -33,3 +33,13 @@ this repository.
 Production intake should use a Cloudflare Worker as a no-storage relay from the
 public homepage to an iCloud email/attachment workflow. See
 `docs/CRM_ARCHITECTURE.md`.
+
+To pull CRM JSON attachments from Apple Mail into iCloud Drive:
+
+```bash
+npm run crm:import-mail
+```
+
+By default this saves matching `[TC-CRM:...]` JSON attachments into
+`~/Library/Mobile Documents/com~apple~CloudDocs/CRM Intake`. Then open the local
+editor at `http://127.0.0.1:4173/crm/local-editor/` and choose that folder.

@@ -174,17 +174,6 @@ function recordFileName(record) {
   return `${record.id}-${slug || "record"}.json`;
 }
 
-function base64FromUtf8(value) {
-  const bytes = new TextEncoder().encode(value);
-  let binary = "";
-
-  for (let index = 0; index < bytes.length; index += 1) {
-    binary += String.fromCharCode(bytes[index]);
-  }
-
-  return btoa(binary);
-}
-
 function emailText(record) {
   return [
     "New CRM contact received.",
@@ -217,7 +206,7 @@ async function sendRecordEmail(record, env) {
     text: emailText(record),
     attachments: [
       {
-        content: base64FromUtf8(json),
+        content: new TextEncoder().encode(json),
         filename,
         type: "application/json",
         disposition: "attachment",
