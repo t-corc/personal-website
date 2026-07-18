@@ -19,6 +19,7 @@ let directoryHandle = null;
 let records = [];
 let selectedId = null;
 let dirty = false;
+let localServerFolder = null;
 
 const tableFields = [
   "fullName",
@@ -170,6 +171,25 @@ async function readRecordsFromFolder(handle) {
   return loaded;
 }
 
+async function loadLocalServerRecords() {
+  const response = await fetch("/api/local-crm/records");
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(result.error || "Unable to load local CRM folder.");
+  }
+
+  directoryHandle = null;
+  localServerFolder = result.folder;
+  records = (result.records || []).map(({ record }) => normalizeCrmRecord(record));
+  selectedId = records[0]?.id || null;
+  folderStatus.textContent = `Auto-loaded ${records.length} record${records.length === 1 ? "" : "s"}`;
+  folderButton.textContent = "Choose different folder";
+  setDirty(false);
+  renderTable();
+  renderEditor();
+}
+
 async function chooseFolder() {
   if (!window.showDirectoryPicker) {
     folderStatus.textContent = "Use Chrome or Edge for folder access";
@@ -177,6 +197,7 @@ async function chooseFolder() {
   }
 
   directoryHandle = await window.showDirectoryPicker({ mode: "readwrite" });
+  localServerFolder = null;
   records = await readRecordsFromFolder(directoryHandle);
   folderStatus.textContent = directoryHandle.name;
   selectedId = records[0]?.id || null;
@@ -217,18 +238,39 @@ function updateSelectedFromForms() {
 
 async function saveRecord() {
   const record = getSelectedRecord();
-  if (!record || !directoryHandle) return;
+  if (!record) return;
 
   updateSelectedFromForms();
 
-  const handle = await directoryHandle.getFileHandle(filenameFor(record), {
-    create: true,
-  });
-  const writable = await handle.createWritable();
-  await writable.write(JSON.stringify(record, null, 2));
-  await writable.close();
+  if (localServerFolder) {
+    const response = await fetch("/api/local-crm/records", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ record }),
+    });
+    const result = await response.json().catch(() => ({}));
 
-  folderStatus.textContent = `Saved ${filenameFor(record)}`;
+    if (!response.ok) {
+      folderStatus.textContent = result.error || "Unable to save record";
+      return;
+    }
+
+    folderStatus.textContent = `Saved ${result.fileName}`;
+  } else if (directoryHandle) {
+    const handle = await directoryHandle.getFileHandle(filenameFor(record), {
+      create: true,
+    });
+    const writable = await handle.createWritable();
+    await writable.write(JSON.stringify(record, null, 2));
+    await writable.close();
+    folderStatus.textContent = `Saved ${filenameFor(record)}`;
+  } else {
+    folderStatus.textContent = "Choose a folder before saving";
+    return;
+  }
+
   setDirty(false);
   renderTable();
   renderEditor();
@@ -278,4 +320,7 @@ customForm.addEventListener("input", () => {
   setDirty(true);
 });
 
-renderTable();
+loadLocalServerRecords().catch((error) => {
+  folderStatus.textContent = error.message || "No folder selected";
+  renderTable();
+});
