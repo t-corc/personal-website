@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-2:I[3547,["223","static/chunks/223-91af6e74c38da96d.js","466","static/chunks/app/music/page-49869a27295423a1.js"],"TouchMusicStudio"]
-3:I[2551,[],"OutletBoundary"]
+2:I[324,["775","static/chunks/775-6d5a06c2bd06f824.js","466","static/chunks/app/music/page-40810609470eea49.js"],"TouchMusicStudio"]
+3:I[484,[],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"OnW17Lt_AomFt-jCTcSyG"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Vj4yJxFoipJ8YPPvT3rd2"}
 5:null

@@ -1,5 +1,6 @@
-const CACHE = "touch-music-shell-v2";
-const SHELL = ["/music/", "/music/manifest.webmanifest"];
+const CACHE = "touch-music-shell-v3";
+const BASE_PATH = self.location.pathname.replace(/\/sw\.js$/, "");
+const SHELL = [`${BASE_PATH}/`, `${BASE_PATH}/manifest.webmanifest`];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)));
@@ -26,6 +27,8 @@ self.addEventListener("fetch", (event) => {
         caches.open(CACHE).then((cache) => cache.put(event.request, copy));
         return response;
       })
-      .catch(() => caches.match(event.request).then((hit) => hit || caches.match("/music/"))),
+      .catch(() =>
+        caches.match(event.request).then((hit) => hit || caches.match(`${BASE_PATH}/`)),
+      ),
   );
 });
