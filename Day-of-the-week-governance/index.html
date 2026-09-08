@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Apply to take charge of one day of the week." />
+    <meta name="theme-color" content="#f1eee7" />
+    <title>Day-of-the-week governance — Tommaso Corciulo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/Day-of-the-week-governance/styles.css" />
+    <script src="/Day-of-the-week-governance/script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="monogram" href="/" aria-label="Tommaso Corciulo home">TC</a>
+      <p>Tommaso Corciulo</p>
+      <a href="#application">Apply now</a>
+    </header>
+
+    <main>
+      <div class="application-column">
+        <section class="intro" aria-labelledby="page-title">
+          <div class="hero-copy">
+            <h1 id="page-title">Take charge of one day of the week.</h1>
+            <p class="lead">I’m opening six days each week to fresh judgement. Choose yours, make your case, and tell me what you’d do with it.</p>
+          </div>
+          <div class="calendar-art" aria-hidden="true">
+            <span class="day-chip chip-mon">Mon</span><span class="day-chip chip-fri">Fri</span><span class="day-chip chip-sun">Sun</span>
+            <i class="spark spark-one"></i><i class="spark spark-two"></i>
+            <div class="calendar-page"><b>Thu</b><small>Taken</small></div>
+          </div>
+        </section>
+
+        <form id="application" action="https://formsubmit.co/tommasocorciulo02@icloud.com" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="New day-of-the-week governance application" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://tommasocorciulo.com/Day-of-the-week-governance/thanks.html" />
+
+          <fieldset class="day-fieldset">
+            <legend>Choose your day</legend>
+            <div class="day-grid">
+              <label><input type="radio" name="Day requested" value="Monday" required /><span>Mon</span></label>
+              <label><input type="radio" name="Day requested" value="Tuesday" /><span>Tue</span></label>
+              <label><input type="radio" name="Day requested" value="Wednesday" /><span>Wed</span></label>
+              <label class="is-taken"><input type="radio" name="Day requested" value="Thursday" disabled /><span>Thu<small>Taken</small></span></label>
+              <label><input type="radio" name="Day requested" value="Friday" /><span>Fri</span></label>
+              <label><input type="radio" name="Day requested" value="Saturday" /><span>Sat</span></label>
+              <label><input type="radio" name="Day requested" value="Sunday" /><span>Sun</span></label>
+            </div>
+          </fieldset>
+
+          <section class="form-section" aria-labelledby="application-title">
+            <div class="section-heading">
+              <h2 id="application-title">Your application</h2>
+            </div>
+
+            <div class="field-row">
+              <label>First name<input name="First name" type="text" autocomplete="given-name" required /></label>
+              <label>Last name<input name="Last name" type="text" autocomplete="family-name" required /></label>
+            </div>
+            <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+            <label>A fun fact<input name="Fun fact" type="text" maxlength="180" placeholder="Something that would never appear on LinkedIn" required /></label>
+            <label>Cover letter<textarea name="Cover letter" rows="7" maxlength="2000" placeholder="Why should this day be trusted to you?" required></textarea></label>
+
+            <div class="upload-group">
+              <div class="upload-heading">
+                <label id="cv-label" for="cv">CV</label>
+                <p>No job-history crap. Relevant facts only.</p>
+              </div>
+              <label class="upload-zone" for="cv" id="upload-zone">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M12 18v-6m-3 3 3-3 3 3" /></svg>
+                <strong id="file-title">Drop your CV here</strong>
+                <span>or choose a file</span>
+                <small>PDF, DOC or DOCX · max 10 MB</small>
+                <input id="cv" name="attachment" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+              </label>
+              <p class="file-error" id="file-error" role="alert"></p>
+            </div>
+
+            <label>Interesting proposals<textarea name="Interesting proposals" rows="5" maxlength="1200" placeholder="Ideas, projects, rules or worthwhile uses for your day" required></textarea></label>
+
+            <label class="consent"><input type="checkbox" name="Privacy acknowledgement" value="Accepted" required /><span>I understand that this information will be used only to review my application and won’t be shared with third parties. Please don’t include sensitive personal data.</span></label>
+
+            <div class="submit-row">
+              <button type="submit">Submit application <span aria-hidden="true">→</span></button>
+              <p id="form-status" role="status" aria-live="polite">All fields are required.</p>
+            </div>
+          </section>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <a class="monogram" href="/">TC</a>
+      <p>Tommaso Corciulo<br />A calmer, more intentional week.</p>
+      <p>A calmer, more intentional week.</p>
+      <p>© <span id="year"></span> Tommaso Corciulo</p>
+    </footer>
+  </body>
+</html>
