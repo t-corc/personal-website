@@ -59,7 +59,10 @@ function render() {
 
 async function start() {
   try {
-    const [rowsResponse, metaResponse] = await Promise.all([fetch("./data/scored.json"), fetch("./data/meta.json")]);
+    const [rowsResponse, metaResponse] = await Promise.all([
+      fetch("./data/scored.json", { cache: "no-store" }),
+      fetch("./data/meta.json", { cache: "no-store" }),
+    ]);
     if (!rowsResponse.ok || !metaResponse.ok) throw new Error("Published data is unavailable");
     scoredRows = await rowsResponse.json();
     const meta = await metaResponse.json();
