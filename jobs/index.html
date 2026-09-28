@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tommaso Corciulo's evidence-based job opportunity shortlist.">
+    <title>Job Matches — Tommaso Corciulo</title>
+    <link rel="stylesheet" href="./app.css?v=1">
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="../">
+        <span class="brand-mark">TC</span>
+        <div><strong>Tommaso Corciulo</strong><small>Job Opportunity Scout</small></div>
+      </a>
+      <nav><button class="nav active">Ranked opportunities</button></nav>
+      <div class="sidebar-footer"><span>Personal search</span><strong>Evidence-based ranking</strong></div>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <span class="eyebrow">Live opportunity shortlist</span>
+          <h1>Job Matches</h1>
+          <p id="update-note">Loading the latest published scan…</p>
+        </div>
+        <a class="home-link" href="../">Back to website</a>
+      </header>
+      <section class="view active">
+        <div class="section-head">
+          <div><h2>Ranked Opportunities</h2><p>Responsibilities matched to verified CV evidence — with gaps, compensation and direct application links.</p></div>
+          <strong id="scores-count">Loading…</strong>
+        </div>
+        <div class="filters">
+          <input id="score-search" type="search" placeholder="Search title or company">
+          <select id="score-location" aria-label="Filter by location"><option value="all">Madrid + Barcelona</option><option value="madrid">Madrid</option><option value="barcelona">Barcelona</option></select>
+          <select id="score-decision" aria-label="Filter by decision"><option value="actionable">Actionable only</option><option value="all">All decisions</option><option value="STRONG_APPLY">Strong apply</option><option value="RESEARCH_MORE">Research more</option><option value="LOW_PRIORITY">Low priority</option><option value="REJECT">Rejected</option></select>
+          <select id="score-sort" aria-label="Ranking view"><option value="score">Best overall</option><option value="achievable">Most achievable</option><option value="upside">Highest financial upside</option><option value="stretch">Ambitious stretch</option><option value="newest">Newest found</option></select>
+        </div>
+        <div id="scores-cards" class="role-list"><div class="empty">Loading roles…</div></div>
+      </section>
+    </main>
+    <script src="./app.js?v=1"></script>
+  </body>
+</html>
